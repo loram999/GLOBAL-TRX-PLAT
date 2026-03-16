@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>GLOBAL TRX - PREDICTION</title>
+    <title>GLOBAL TRX • 1000 HISTORY</title>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
@@ -12,11 +12,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background: #0b0e14;
+            background: #0a0c12;
             min-height: 100vh;
             padding: 12px;
         }
@@ -26,68 +26,119 @@
             margin: 0 auto;
         }
 
-        /* Key Section */
+        /* KEY SECTION – ELEVATED */
         .key-section {
-            background: #1a1f2b;
-            border-radius: 24px;
-            padding: 32px 20px;
-            margin-bottom: 16px;
-            border: 1px solid #2f3542;
+            background: linear-gradient(145deg, #1e2533, #131a26);
+            border-radius: 40px;
+            padding: 40px 24px;
+            margin: 20px 0 40px;
+            border: 1px solid #2f3a4b;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(2px);
+        }
+
+        .lock-icon {
+            width: 70px;
+            height: 70px;
+            background: #2a3442;
+            border-radius: 30px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid #3b7cff;
+            box-shadow: 0 8px 0 #0f1a2e;
+        }
+
+        .lock-icon svg {
+            width: 34px;
+            height: 34px;
+            fill: none;
+            stroke: #3b7cff;
+            stroke-width: 2.5;
+            stroke-linecap: round;
         }
 
         .key-title {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 32px;
+            font-weight: 700;
             color: #ffffff;
             text-align: center;
-            margin-bottom: 24px;
-            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 5px rgba(59,124,255,0.3);
+        }
+
+        .key-sub {
+            color: #8f9bb3;
+            text-align: center;
+            font-size: 15px;
+            margin-bottom: 32px;
+            font-weight: 400;
         }
 
         .key-input-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
         }
 
         .key-input {
-            background: #0f131a;
-            border: 1px solid #2f3542;
-            border-radius: 16px;
-            padding: 16px 20px;
-            font-size: 16px;
+            background: #0f151f;
+            border: 2px solid #28303f;
+            border-radius: 28px;
+            padding: 18px 24px;
+            font-size: 18px;
             color: #ffffff;
             outline: none;
             transition: all 0.2s;
+            letter-spacing: 1px;
+            font-weight: 500;
+            text-align: center;
         }
 
         .key-input:focus {
             border-color: #3b7cff;
+            background: #121b28;
+            box-shadow: 0 0 0 4px rgba(59,124,255,0.15);
         }
 
         .key-button {
-            background: #3b7cff;
+            background: linear-gradient(145deg, #3b7cff, #2a5fdd);
             border: none;
-            border-radius: 16px;
-            padding: 16px 20px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 28px;
+            padding: 18px 24px;
+            font-size: 18px;
+            font-weight: 700;
             color: #ffffff;
             cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 10px 0 #13203a, 0 4px 18px rgba(59,124,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
         }
 
         .key-button:active {
-            background: #2a5fcc;
-            transform: scale(0.98);
+            transform: translateY(5px);
+            box-shadow: 0 5px 0 #13203a, 0 4px 18px rgba(59,124,255,0.4);
         }
 
         .key-message {
-            color: #ff4d4d;
-            font-size: 14px;
+            color: #ff8a8a;
+            font-size: 15px;
             text-align: center;
-            margin-top: 12px;
-            min-height: 20px;
+            margin-top: 20px;
+            min-height: 24px;
+            font-weight: 500;
+        }
+
+        .key-footer-note {
+            text-align: center;
+            color: #4e5c73;
+            font-size: 13px;
+            margin-top: 20px;
+            border-top: 1px dashed #2e3849;
+            padding-top: 20px;
         }
 
         /* Main Content */
@@ -212,7 +263,7 @@
             background: #ff4d4d;
         }
 
-        /* Stats Grid */
+        /* Stats Grid (Accuracy, Total, Longest Lose, Longest Win) */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -232,12 +283,18 @@
             font-size: 12px;
             color: #8f9bb3;
             margin-bottom: 8px;
+            font-weight: 500;
+            white-space: nowrap;
         }
 
         .stat-value {
             font-size: 20px;
             font-weight: 700;
             color: #ffffff;
+        }
+
+        .stat-value.green {
+            color: #2ecc71;
         }
 
         .stat-value.blue {
@@ -357,42 +414,41 @@
             text-align: right;
         }
 
-        .refresh-button {
-            background: #3b7cff;
-            border: none;
-            border-radius: 24px;
-            padding: 18px 20px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #ffffff;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.2s;
-            margin-bottom: 30px;
-        }
-
-        .refresh-button:active {
-            background: #2a5fcc;
-            transform: scale(0.98);
-        }
-
+        /* NO REFRESH BUTTON - removed as requested */
+        
         .loading {
             text-align: center;
             padding: 40px 20px;
             color: #8f9bb3;
         }
+
+        .auto-refresh-note {
+            text-align: center;
+            color: #4e5c73;
+            font-size: 12px;
+            margin: 8px 0 20px;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Key Section -->
+        <!-- KEY SECTION – Premium style -->
         <div class="key-section" id="keySection">
-            <div class="key-title">Access Key Required</div>
+            <div class="lock-icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="5" y="11" width="14" height="11" rx="2" ry="2" stroke="currentColor" />
+                    <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                </svg>
+            </div>
+            <div class="key-title">Access Vault</div>
+            <div class="key-sub">enter your private key</div>
             <div class="key-input-group">
-                <input type="text" id="keyInput" class="key-input" placeholder="Enter your access key" autocomplete="off">
-                <button class="key-button" onclick="checkKey()">Verify Access</button>
+                <input type="text" id="keyInput" class="key-input" placeholder="••••••••" autocomplete="off">
+                <button class="key-button" onclick="checkKey()">unlock →</button>
             </div>
             <div id="keyMessage" class="key-message"></div>
+            <div class="key-footer-note">premium prediction • deep pattern</div>
         </div>
 
         <!-- Main Content -->
@@ -420,43 +476,44 @@
                 </div>
             </div>
 
-            <!-- Stats -->
+            <!-- ACCURACY / TOTAL / LONGEST LOSE / LONGEST WIN (based on last 1000) -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-label">Total</div>
-                    <div class="stat-value" id="totalResults">0</div>
+                    <div class="stat-label">Accuracy</div>
+                    <div class="stat-value green" id="accuracyStat">0%</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">BIG</div>
-                    <div class="stat-value blue" id="bigCount">0</div>
+                    <div class="stat-label">Total (1k)</div>
+                    <div class="stat-value" id="totalPredStat">0</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">SMALL</div>
-                    <div class="stat-value red" id="smallCount">0</div>
+                    <div class="stat-label">Longest Lose</div>
+                    <div class="stat-value red" id="longestLoseStat">0</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">BIG %</div>
-                    <div class="stat-value" id="bigPercent">0%</div>
+                    <div class="stat-label">Longest Win</div>
+                    <div class="stat-value blue" id="longestWinStat">0</div>
                 </div>
             </div>
 
-            <!-- All Logics -->
+            <!-- All Logics (calculated from last 1000) -->
             <div class="logics-grid" id="logicsContainer"></div>
 
-            <!-- History -->
+            <!-- History (last 20 of 1000) -->
             <div class="history-section">
-                <div class="section-header">Last 20 Results</div>
+                <div class="section-header">RESULTS</div>
                 <div class="history-list" id="historyList">
-                    <div class="loading">Loading history...</div>
+                    <div class="loading">Loading 1000 results...</div>
                 </div>
             </div>
 
-            <button class="refresh-button" onclick="loadData()">Refresh Data</button>
+            <!-- Auto refresh indicator (no button) -->
+            <div class="auto-refresh-note">STT မသုံးရ PREDICTOR</div>
         </div>
     </div>
 
     <script>
-        // Firebase Configuration
+        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyBiUJPpEmepO0XiWmhPA8rMZjioB5Y2wr4",
             authDomain: "global-trx-db.firebaseapp.com",
@@ -467,17 +524,20 @@
             appId: "1:20311434523:web:b5cd2eded2d7cd9e011fbe"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // Key Validation Function
+        // Global variable to store full 1000+ periods (sorted descending)
+        let allPeriods = [];
+        let periodData = {};
+
+        // Key check
         async function checkKey() {
             const key = document.getElementById('keyInput').value.trim();
             const messageEl = document.getElementById('keyMessage');
             
             if (!key) {
-                messageEl.textContent = 'Please enter a key';
+                messageEl.textContent = '⛔ key required';
                 return;
             }
 
@@ -486,7 +546,7 @@
                 const keyData = snapshot.val();
                 
                 if (!keyData) {
-                    messageEl.textContent = 'Invalid key';
+                    messageEl.textContent = '❌ invalid key';
                     return;
                 }
 
@@ -494,36 +554,31 @@
                 const expiry = new Date(keyData.expiry);
                 
                 if (expiry < today) {
-                    messageEl.textContent = 'Key expired';
+                    messageEl.textContent = '⌛ key expired';
                     return;
                 }
 
                 if (keyData.used >= keyData.limit) {
-                    messageEl.textContent = 'Key usage limit reached';
+                    messageEl.textContent = '⚠️ usage limit reached';
                     return;
                 }
 
-                // Update usage count
                 await database.ref('/global_trx/keys/' + key + '/used').set(keyData.used + 1);
                 
-                // Show main content
                 document.getElementById('keySection').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 
-                // Load data
-                loadData();
-                startTimer();
-                
-                // Auto refresh
-                setInterval(loadData, 60000);
+                // Load full 1000+ data
+                await loadFullData();
+                startTimer(); // timer handles auto refresh at 0 seconds
                 
             } catch (error) {
-                console.error('Key check error:', error);
-                messageEl.textContent = 'System error, try again';
+                console.error(error);
+                messageEl.textContent = '⚠️ system error';
             }
         }
 
-        // Timer Function
+        // Timer (UTC) - auto refreshes when timer hits 0
         function startTimer() {
             function updateTimer() {
                 const now = new Date();
@@ -546,40 +601,98 @@
                 
                 document.getElementById('currentPeriod').textContent = currentPeriod;
                 
+                // AUTO REFRESH when timer hits 0 (new minute)
                 if (remaining === 0 || remaining === 60) {
-                    loadData();
+                    loadFullData();
                 }
             }
-            
             updateTimer();
             setInterval(updateTimer, 1000);
         }
 
-        // Load Data from Firebase
-        async function loadData() {
+        // Load full data (fetch all, then keep latest 1000+)
+        async function loadFullData() {
             try {
                 const snapshot = await database.ref('/global_trx/period_bs').once('value');
-                const periodData = snapshot.val() || {};
+                periodData = snapshot.val() || {};
                 
-                const periods = Object.keys(periodData).sort().reverse();
+                // Get all periods, sort descending (newest first)
+                allPeriods = Object.keys(periodData).sort().reverse();
                 
-                if (periods.length === 0) {
-                    return;
-                }
+                if (allPeriods.length === 0) return;
+
+                // Use at most 1000 periods for calculations
+                const recent1000 = allPeriods.slice(0, Math.min(1000, allPeriods.length));
                 
-                updateStats(periodData, periods);
+                // Update all UI with recent1000
+                updateAdvancedStats(periodData, recent1000);
                 
-                const predictions = runPredictions(periodData, periods);
-                updatePredictionUI(predictions, periods[0]);
+                // Run predictions using recent1000
+                const predictions = runPredictions(periodData, recent1000);
+                updatePredictionUI(predictions, allPeriods[0]); // next period based on absolute latest
                 updateLogicsUI(predictions.logics);
-                updateHistory(periodData, periods);
+                
+                // Show last 20 of all (latest 20)
+                updateHistory(periodData, allPeriods.slice(0, 20));
                 
             } catch (error) {
                 console.error('Load error:', error);
             }
         }
 
-        // Run All Prediction Logics
+        // Update stats based on recent1000
+        function updateAdvancedStats(periodData, periods) {
+            const total = periods.length;
+            let bCount = 0, sCount = 0;
+            
+            // streak
+            let currentWin = 0, currentLose = 0;
+            let longestWin = 0, longestLose = 0;
+            
+            for (let p of periods) {
+                const res = periodData[p].bs;
+                if (res === 'B') {
+                    bCount++;
+                    currentWin++;
+                    currentLose = 0;
+                    if (currentWin > longestWin) longestWin = currentWin;
+                } else {
+                    sCount++;
+                    currentLose++;
+                    currentWin = 0;
+                    if (currentLose > longestLose) longestLose = currentLose;
+                }
+            }
+            
+            // Accuracy: last 3 repeat test on newest 500 of the 1000
+            let correct = 0, tested = 0;
+            const testPeriods = periods.slice(0, Math.min(500, periods.length));
+            for (let i = 3; i < testPeriods.length; i++) {
+                const prev3 = testPeriods.slice(i-3, i).map(p => periodData[p].bs).join('');
+                const actual = periodData[testPeriods[i]].bs;
+                
+                let matchB = 0, matchS = 0;
+                for (let j = 0; j < i-3; j++) {
+                    if (testPeriods.slice(j, j+3).map(p => periodData[p].bs).join('') === prev3) {
+                        const nextRes = periodData[testPeriods[j+3]].bs;
+                        if (nextRes === 'B') matchB++; else matchS++;
+                    }
+                }
+                if (matchB + matchS > 0) {
+                    tested++;
+                    const pred = matchB > matchS ? 'B' : (matchS > matchB ? 'S' : null);
+                    if (pred === actual) correct++;
+                }
+            }
+            const acc = tested > 0 ? ((correct / tested) * 100).toFixed(1) : '0.0';
+            
+            document.getElementById('accuracyStat').textContent = acc + '%';
+            document.getElementById('totalPredStat').textContent = total;
+            document.getElementById('longestLoseStat').textContent = longestLose;
+            document.getElementById('longestWinStat').textContent = longestWin;
+        }
+
+        // --- PREDICTION LOGICS (operate on recent1000) ---
         function runPredictions(periodData, periods) {
             const logics = [];
             
@@ -819,24 +932,6 @@
             };
         }
 
-        // Update Statistics
-        function updateStats(periodData, periods) {
-            const total = periods.length;
-            let bCount = 0;
-            
-            for (let p of periods) {
-                if (periodData[p].bs === 'B') bCount++;
-            }
-            
-            const sCount = total - bCount;
-            const bPercent = ((bCount / total) * 100).toFixed(1);
-            
-            document.getElementById('totalResults').textContent = total;
-            document.getElementById('bigCount').textContent = bCount;
-            document.getElementById('smallCount').textContent = sCount;
-            document.getElementById('bigPercent').textContent = bPercent + '%';
-        }
-
         // Update Prediction UI
         function updatePredictionUI(predictions, lastPeriod) {
             let nextPeriod = 'N/A';
@@ -888,13 +983,14 @@
             });
         }
 
-        // Update History
+        // Update History (show last 20)
         function updateHistory(periodData, periods) {
             const historyList = document.getElementById('historyList');
             historyList.innerHTML = '';
             
             periods.slice(0, 20).forEach(period => {
                 const data = periodData[period];
+                if (!data) return;
                 const item = document.createElement('div');
                 item.className = 'history-item';
                 
@@ -921,12 +1017,14 @@
             });
         }
 
-        // Enter key for input
+        // Enter key shortcut
         document.getElementById('keyInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkKey();
             }
         });
     </script>
+</body>
+</html>
 </body>
 </html>
